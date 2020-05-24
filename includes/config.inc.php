@@ -6,7 +6,7 @@
     define("SITEDESC", "");
     define("SITEOWNER", "Jérémy Dumas");
 
-    ///section pour ma bd
+    // Section pour ma bd
     define("DBNAME", "ecommerce");
     define("DBUSERNAME", "webphp");
     define("DBPASSWORD", "qwerty123");
