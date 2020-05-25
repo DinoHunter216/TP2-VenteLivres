@@ -111,5 +111,10 @@
 
     function getNumberOfItems()
     {
-        echo "1";
+        $produits = $_SESSION['cartArray'];
+        $numberOfItems = 0;
+        foreach ($produits as $produit) {
+            $numberOfItems++;
+        }
+        echo $numberOfItems;
     }

@@ -7,9 +7,5 @@
     session_start();
 
     if (isset($_POST['cart'])) {
-        if (isset($_SESSION['cartExists'])) {
-            addItemToCart($_POST['cart']);
-        } else {
-            createCart();
-        }
+        addItemToCart($_POST['cart']);
     }

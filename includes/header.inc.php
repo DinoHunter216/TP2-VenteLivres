@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php session_start(); createCart(); ?>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-dark shadow p-3 mb-5">
         <!-- Book Icon venant du site de Bootstrap -->
@@ -23,7 +23,7 @@
                     <a class="nav-link mx-2 text-white" href="/accueil">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white ml-2" href="">Panier
+                    <a class="nav-link text-white ml-2" href="/panier">Panier
                         <span class="badge badge-danger"><?php getNumberOfItems() ?></span>
                     </a>
                 </li>
