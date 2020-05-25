@@ -8,4 +8,6 @@
 
     if (isset($_POST['cart'])) {
         addItemToCart($_POST['cart']);
+        echo getNumberOfItems();
     }
+    redirect("panier");

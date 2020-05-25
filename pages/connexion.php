@@ -25,13 +25,14 @@
     <div class=" container mb-5">
         <div class="card border border-dark shadow my-5 bg-light">
             <div class="card-body p-5">
+                <h1 class=" ml-2 text-danger">Connexion</h1>
+                <hr style="border: none; border-bottom: 2px solid;" class="text-danger" />
                 <?php
                     if (isset($_SESSION['utilisateur'])):
                         echo "Déjà connecté";
                     else:
                 ?>
-                <h1 class=" ml-2 text-danger">Connexion</h1>
-                <hr style="border: none; border-bottom: 2px solid;" class="text-danger" />
+
                 <form action="action/validateConnection.php" method="post" class="needs-validation" novalidate>
                     <div class="rendered-form">
                         <div class="form-group col-sm-12 col-md-6 col-lg-4">

@@ -1,4 +1,9 @@
-<?php session_start(); createCart(); ?>
+<?php
+    session_start();
+    if (!isset($_SESSION['cartExists'])) {
+        createCart();
+    }
+?>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-dark shadow p-3 mb-5">
         <!-- Book Icon venant du site de Bootstrap -->
@@ -24,7 +29,11 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white ml-2" href="/panier">Panier
-                        <span class="badge badge-danger"><?php getNumberOfItems() ?></span>
+                        <?php
+                            if (getNumberOfItems() > 0) {
+                                echo "<span class='badge badge-danger'>".getNumberOfItems()."</span>";
+                            }
+                        ?>
                     </a>
                 </li>
             </ul>

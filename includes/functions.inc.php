@@ -116,5 +116,60 @@
         foreach ($produits as $produit) {
             $numberOfItems++;
         }
-        echo $numberOfItems;
+        return $numberOfItems;
+    }
+
+    function showCart()
+    {
+        $Produit = new Produit();
+        if (getNumberOfItems() > 0) {
+            $products = $_SESSION['cartArray'];
+            foreach ($products as $id) {
+                $Produit->id = $id;
+                $Produit->Find(); ?>
+<div class="row">
+    <div class="col-sm-2 col-lg-1">
+        <a tabindex="0" class="btn btn-lg" role="button" data-toggle="popover" data-trigger="focus"
+            title="Description du livre"
+            data-content="<?php echo $Produit->description; ?>">
+            <img src='<?php echo "/img/".$Produit->image.".jpg"; ?>'
+                alt='Couverture' width='70' height='105' class="border border-dark rounded-sm">
+        </a>
+        </br>
+    </div>
+    <div class="ml-sm-4 ml-md-4 col-sm-8">
+        <div class="container-fluid">
+            <div class="row">
+                <h3>
+                    <?php echo $Produit->nom; ?>
+                </h3>
+            </div>
+            <div class="row mt-1">
+                <a href='/<?php echo $Produit->image; ?>'
+                    class="btn btn-outline-danger my-1">
+                    Voir plus
+                </a>
+                <p class="mt-2 ml-3">
+                    <?php echo $Produit->prix." $"; ?>
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm-2 col-lg-1">
+        <form action="action/deleteItem.php" method="post" class="my-5">
+            <div class="rendered-form">
+                <input type="hidden" name="item"
+                    value="<?php echo $Produit->id; ?>">
+                <input type="submit" value="Supprimer du panier" class="btn btn-outline-danger">
+            </div>
+        </form>
+    </div>
+
+</div>
+<?php
+            }
+        } else {
+            echo "Aucun produit dans le panier";
+        }
     }
