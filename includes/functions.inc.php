@@ -97,3 +97,8 @@
 <?php endfor;
         echo "</div></div>";
     }
+
+    function getNumberOfItems()
+    {
+        echo "1";
+    }

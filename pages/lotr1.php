@@ -41,7 +41,7 @@
                 </br>
                 <?php echo "<h5 align='justify' class='text-danger'>Prix: ".$Produit->prix."$</h5></br>"; ?>
                 <?php
-                    if ($Produit->quantite == 0) {
+                    if ($Produit->quantite == 0):
                         echo "<div class='container'>
                             <div class='row'>
                                 <svg class='bi bi-exclamation-circle text-danger mb-2' width='2em' height='2em' viewBox='0 0 16 16' fill='currentColor'
@@ -52,16 +52,21 @@
                                 <h3 align='justify' class='ml-2'>Hors stock</h3>
                             </div>
                         </div></br>";
-                    } else {
-                        echo "<h5 align='justify'>Quantité en stock: ".$Produit->quantite." livres disponibles</h5></br>";
-                    }
+                    else: ?>
+                <h5 align='justify'>Quantité en stock: <?php echo $Produit->quantite; ?> livres disponibles
+                </h5></br>
+                </br>
+                </br>
+                </br>
+                <form action="action/validateCart.php" method="post">
+                    <div class="rendered-form"><input type="hidden"
+                            name="<?php echo $Produit->id; ?>"></div>
+                    <input type="submit" value="Ajouter au panier" class="btn btn-outline-danger">
+                </form>
+                <?php
+                    endif;
                 ?>
-                </br>
-                </br>
-                </br>
-                <a href='' class="btn btn-outline-danger btn-lg my-2 my-sm-2">
-                    Ajouter au panier
-                </a>
+
             </div>
             <div class="col-sm-12 col-lg-4 container ml-2">
                 <div class="row">

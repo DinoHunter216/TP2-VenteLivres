@@ -23,8 +23,8 @@
                     <a class="nav-link mx-2 text-white" href="/accueil">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white mx-2" href="">Panier
-                        <span class="ml-2 badge badge-danger">Nouveau</span>
+                    <a class="nav-link text-white ml-2" href="">Panier
+                        <span class="badge badge-danger"><?php getNumberOfItems() ?></span>
                     </a>
                 </li>
             </ul>
