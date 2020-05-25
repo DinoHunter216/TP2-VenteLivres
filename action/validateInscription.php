@@ -2,8 +2,6 @@
     require "../includes/config.inc.php";
     require "../includes/functions.inc.php";
     require "../classes/Client.class.php";
-    require DOCROOT."/includes/head.inc.php";
-    require DOCROOT."/includes/header.inc.php";
 
     if (isset($_POST['firstName']) && isset($_POST['lastName'])) {
         if (isset($_POST['adress']) && isset($_POST['city'])) {
@@ -14,6 +12,7 @@
                         if ($id === -1) {
                             if (validatePassword()) {
                                 if (validateEmail()) {
+                                    session_start();
                                     createSession($_POST['user']);
                                     createUser();
                                 } else {

@@ -11,6 +11,17 @@
         $_SESSION['utilisateur'] = $user;
     }
 
+    function createCart()
+    {
+        $_SESSION['cartExists'] = true;
+        $_SESSION['cartArray'] = array();
+    }
+
+    function addItemToCart($item)
+    {
+        array_push($_SESSION['cartArray'], $item);
+    }
+
     function checkForUser($user)
     {
         $Client = new Client();

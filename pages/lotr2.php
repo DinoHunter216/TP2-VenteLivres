@@ -59,8 +59,9 @@
                 </br>
                 </br>
                 <form action="action/validateCart.php" method="post">
-                    <div class="rendered-form"><input type="hidden"
-                            name="<?php echo $Produit->id; ?>"></div>
+                    <div class="rendered-form"><input type="hidden" name="cart"
+                            value="<?php echo $Produit->id; ?>">
+                    </div>
                     <input type="submit" value="Ajouter au panier" class="btn btn-outline-danger">
                 </form>
                 <?php
