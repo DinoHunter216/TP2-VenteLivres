@@ -32,15 +32,13 @@
                 <form action="/action/validateModification.php" method="post">
                     <div class="rendered-form container-fluid">
                         <div class="row">
-                            <div class="form-group col-sm-12 col-md-6">
-                                <label for="firstName" class="formbuilder-text-label">Prénom
-                                </label>
-                                <input type="text" name="firstName" id="firstName" class="form-control">
-                            </div>
-                            <div class="form-group col-sm-12 col-md-6">
-                                <label for="lastName" class="formbuilder-text-label">Nom
-                                </label>
-                                <input type="text" name="lastName" id="lastName" class="form-control">
+                            <label class="formbuilder-text-label ml-3">Prénom et Nom</label>
+                            <div class="input-group form-group col-sm-12">
+
+                                <input type="text" name="firstName" id="firstName" required="required"
+                                    class="form-control">
+                                <input type="text" name="lastName" id="lastName" required="required"
+                                    class="form-control">
                             </div>
                         </div>
                         <div class="row">

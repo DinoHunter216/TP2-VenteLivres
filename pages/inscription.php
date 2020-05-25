@@ -34,17 +34,13 @@
                 <form action="/action/validateInscription.php" method="post" class="needs-validation" novalidate>
                     <div class="rendered-form container-fluid">
                         <div class="row">
-                            <div class=" form-group col-sm-12 col-md-6">
-                                <label for="firstName" class="formbuilder-text-label">Prénom<span
-                                        class="formbuilder-required" style="color: red;">*</span>
-                                </label>
+                            <label class="formbuilder-text-label ml-3">Prénom et Nom<span class="formbuilder-required"
+                                    style="color: red;">*</span>
+                            </label>
+                            <div class="input-group form-group col-sm-12">
+
                                 <input type="text" name="firstName" id="firstName" required="required"
                                     class="form-control">
-                            </div>
-                            <div class=" form-group col-sm-12 col-md-6">
-                                <label for="lastName" class="formbuilder-text-label">Nom<span
-                                        class="formbuilder-required" style="color: red;">*</span>
-                                </label>
                                 <input type="text" name="lastName" id="lastName" required="required"
                                     class="form-control">
                             </div>

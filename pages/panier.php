@@ -30,7 +30,21 @@
                 <hr style="border: none; border-bottom: 2px solid;" class="text-danger" />
 
                 <div class="container-fluid">
-                    <?php showCart(); ?>
+                    <?php
+                        showCart();
+                        if (getNumberOfItems() > 0 && isset($_SESSION['utilisateur'])):
+                    ?>
+                    <form action="action/validateOrder.php" method="post" class="mt-5">
+                        <div class="rendered-form">
+                            <input type="submit" value="Passer ma commande" class="btn btn-outline-danger mx-auto"
+                                style="width: 100%;">
+                        </div>
+                    </form>
+                    <?php
+                        else:
+                            echo "<p class='ml-3 mb-0 mt-2'>Vous devez être connecté pour passer une commande.</p>";
+                        endif;
+                    ?>
                 </div>
             </div>
         </div>
