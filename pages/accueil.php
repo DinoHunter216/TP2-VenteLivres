@@ -13,6 +13,7 @@
     ?>
 
     <h1 class=" ml-3 text-danger">Accueil</h1>
+    <h3 class=" ml-3">Le meilleur vendeur de livre chez LocalHost</h3>
 
     <div class="container-fluid">
         <hr style=" border: none; border-bottom: 2px solid;" class="text-danger" />
@@ -32,7 +33,7 @@
                             <h3>
                                 <?php echo $produit['nom']."</br>"; ?>
                             </h3>
-                            <a href='/<?php echo $produit['image']; ?>'
+                            <a href='pages/livre.php?id=<?php echo $produit['id']; ?>'
                                 class="btn btn-outline-danger my-2 my-sm-0">
                                 Voir plus
                             </a>

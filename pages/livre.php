@@ -1,7 +1,11 @@
+<?php if (isset($_GET['id'])): ?>
+
 <!doctype html>
 <html class="no-js" lang="">
 
 <?php
+    require "../includes/config.inc.php";
+    require DOCROOT."/includes/functions.inc.php";
     define("SITETITLE", "| Livres");
     require DOCROOT."/includes/head.inc.php";
 ?>
@@ -10,18 +14,19 @@
     <?php
         require DOCROOT."/includes/header.inc.php";
         require DOCROOT."/classes/Produit.class.php";
-    
+
         $Produit = new Produit();
-        $Produit->id = "6";
+        $Produit->id = $_GET['id'];
         $Produit->Find();
 
         $Produit2 = new Produit();
-        $Produit2->id = "7";
+        $Produit2->id = getRandomId();
         $Produit2->Find();
 
         $Produit3 = new Produit();
-        $Produit3->id = "8";
+        $Produit3->id = getRandomId();
         $Produit3->Find();
+
     ?>
     <div class="container-fluid">
         <div class="row">
@@ -29,13 +34,13 @@
             </h1>
         </div>
         <div class="row">
-            <h4 class="ml-3 text-dark">Date de publication: 1998-08
-            </h4></br>
+            <h4 class="ml-3 text-dark"><?php echo "Date de publication: ".$Produit->date."</br>"; ?>
+            </h4>
         </div>
         <hr style="border: none; border-bottom: 2px solid;" class="text-danger" />
 
         <div class="row">
-            <?php echo "<img src='img/".$Produit->image.".jpg' class='img-fluid ml-3 border border-dark rounded-lg' alt='Couverture' width='400' height='600'></br>"; ?>
+            <?php echo "<img src='/img/".$Produit->image.".jpg' class='img-fluid ml-3 border border-dark rounded-lg' alt='Couverture' width='400' height='600'></br>"; ?>
             <div class="col-sm-12 col-md-12 col-lg-4">
                 <?php echo "<h5 align='justify'>".$Produit->description."</h5></br>"; ?>
                 </br>
@@ -58,7 +63,7 @@
                 </br>
                 </br>
                 </br>
-                <form action="action/validateCart.php" method="post">
+                <form action="../action/validateCart.php" method="post">
                     <div class="rendered-form"><input type="hidden" name="cart"
                             value="<?php echo $Produit->id; ?>">
                     </div>
@@ -74,7 +79,7 @@
                         <h3>
                             <?php echo $Produit2->nom."</br>"; ?>
                         </h3>
-                        <a href='/<?php echo $Produit2->image; ?>'
+                        <a href='livre.php?id=<?php echo $Produit2->id; ?>'
                             class="btn btn-outline-danger my-2 my-sm-0">
                             Voir plus
                         </a>
@@ -83,7 +88,7 @@
                         <a tabindex="0" class="btn btn-lg" role="button" data-toggle="popover" data-trigger="focus"
                             title="Description du livre"
                             data-content="<?php echo $Produit2->description ?>">
-                            <img src='<?php echo "img/".$Produit2->image.".jpg"; ?>'
+                            <img src='<?php echo "/img/".$Produit2->image.".jpg"; ?>'
                                 alt='Couverture' width='130' height='200' class="border border-dark rounded-sm">
                         </a>
                         </br>
@@ -94,7 +99,7 @@
                         <h3>
                             <?php echo $Produit3->nom."</br>"; ?>
                         </h3>
-                        <a href='/<?php echo $Produit3->image; ?>'
+                        <a href='livre.php?id=<?php echo $Produit3->id; ?>'
                             class="btn btn-outline-danger my-2 my-sm-0">
                             Voir plus
                         </a>
@@ -103,7 +108,7 @@
                         <a tabindex="0" class="btn btn-lg" role="button" data-toggle="popover" data-trigger="focus"
                             title="Description du livre"
                             data-content="<?php echo $Produit3->description ?>">
-                            <img src='<?php echo "img/".$Produit3->image.".jpg"; ?>'
+                            <img src='<?php echo "/img/".$Produit3->image.".jpg"; ?>'
                                 alt='Couverture' width='130' height='200' class="border border-dark rounded-sm">
                         </a>
                         </br>
@@ -121,3 +126,6 @@
 </body>
 
 </html>
+
+<?php else: echo "Test";
+endif;

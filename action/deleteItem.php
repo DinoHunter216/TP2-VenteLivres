@@ -4,7 +4,6 @@
 
     session_start();
     if (isset($_POST['item'])) {
-        $index = array_search($_POST['item'], $_SESSION['cartArray']);
-        unset($_SESSION['cartArray'][$index]);
+        deleteItemFromCart($_POST['item']);
     }
     redirect("panier");

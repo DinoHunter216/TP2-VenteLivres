@@ -34,21 +34,42 @@
                         showCart();
                         if (getNumberOfItems() > 0 && isset($_SESSION['utilisateur'])):
                     ?>
-                    <form action="action/validateOrder.php" method="post" class="mt-5">
+                    <form action="action/validateOrder.php" method="post" class="mt-5 needs-validation" novalidate>
                         <div class="rendered-form">
+                            <div class="form-group col-sm-12 mb-4">
+                                <label for="payment">Méthode de paiement<span class="formbuilder-required"
+                                        style="color: red;">*</span></label>
+                                <select class="form-control" name="payment" required="required" id="payment">
+                                    <option disabled> -- Choisir une option -- </option>
+                                    <option value="check">Chèque</option>
+                                    <option value="cash">Comptant</option>
+                                    <option value="credit">Crédit</option>
+                                    <option value="paypal">Paypal</option>
+                                </select>
+                                <div class="invalid-tooltip">
+                                    Veuillez choisir une méthode paiement.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
                             <input type="submit" value="Passer ma commande" class="btn btn-outline-danger mx-auto"
                                 style="width: 100%;">
                         </div>
                     </form>
                     <?php
                         else:
-                            echo "<p class='ml-3 mb-0 mt-2'>Vous devez être connecté pour passer une commande.</p>";
+                            echo "<p class='mb-0 mt-2'>Vous devez être connecté pour passer une commande.</p>";
                         endif;
                     ?>
                 </div>
             </div>
         </div>
     </div>
+    <?php require DOCROOT."/includes/javascript.inc.php"; ?>
+    <script>
+        document.getElementById("payment").selectedIndex = -1;
+        //https://stackoverflow.com/questions/8605516/default-select-option-as-blank
+    </script>
 </body>
 
 </html>

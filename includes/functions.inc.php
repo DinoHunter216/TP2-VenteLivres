@@ -169,7 +169,53 @@
 </div>
 <?php
             }
+            showTotalPrice();
         } else {
             echo "Aucun produit dans le panier";
         }
+    }
+
+    function showTotalPrice()
+    {
+        $price = 0;
+        $Produit = new Produit();
+        $products = $_SESSION['cartArray'];
+        foreach ($products as $id) {
+            $Produit->id = $id;
+            $Produit->Find();
+            $price += $Produit->prix;
+        }
+        echo "<h4 class='ml-3 mb-0 mt-2 text-danger'>Le prix total est de ".$price."$</h4>";
+    }
+
+    function deleteItemFromCart($item)
+    {
+        $index = array_search($item, $_SESSION['cartArray']);
+        unset($_SESSION['cartArray'][$index]);
+    }
+
+    function createOrder($method)
+    {
+        $Commande = new Commande();
+        $Client = new Client();
+        // $Commande->date = date("Y-m-d");
+        // $Commande->statut = 'en cours';
+        // if ($method == 'check') {
+        //     $Commande->type_paiement = 'chèque';
+        // } elseif ($method == 'cash') {
+        //     $Commande->type_paiement = 'comptant';
+        // } elseif ($method == 'credit') {
+        //     $Commande->type_paiement = 'crédit';
+        // } elseif ($method == 'paypal') {
+        //     $Commande->type_paiement = 'paypal';
+        // }
+        // $client = $Client->checkForUser($_SESSION['utilisateur']);
+        // $client->Find();
+        // $Commande->id_client = $client;
+        // $Commande->Create();
+    }
+
+    function getRandomId()
+    {
+        return rand(3, 11);
     }
