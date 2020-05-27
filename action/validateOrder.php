@@ -11,6 +11,7 @@
     if (isset($_POST['payment'])) {
         $clientId = createOrder($_POST['payment']);
         createBill($clientId);
+        getAdress($clientId);
         $_SESSION['price'] = getTotalPrice();
         removeQuantities();
         emptyCart();

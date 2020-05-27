@@ -2,9 +2,6 @@
     require "../includes/config.inc.php";
     require "../includes/functions.inc.php";
     require "../classes/Client.class.php";
-    require DOCROOT."/includes/head.inc.php";
-    require DOCROOT."/includes/header.inc.php";
-
     $id = checkForUser($_SESSION['utilisateur']);
 
     $Client = new Client();
@@ -54,39 +51,4 @@
     }
 
     $Client->Save();
-
-    function validatePassword()
-    {
-        $ids = getIDs();
-
-        foreach ($ids as $id) {
-            if (checkForPassword($_POST['password'], $id)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    function validateEmail()
-    {
-        $ids = getIDs();
-
-        foreach ($ids as $id) {
-            if (checkForEmail($_POST['email'], $id)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    function getIDs()
-    {
-        $Client = new Client();
-        $clients = $Client->all();
-
-        $id = array();
-        foreach ($clients as $client) {
-            array_push($id, $client['id']);
-        }
-        return $id;
-    }
+    redirect();

@@ -48,8 +48,8 @@
                                 $Produit->Find();
                                 $price = $Produit->prix;
                                 echo "<div class='row'>";
-                                echo "<div class='col-6'><h4>Produit #".$product['id_produit']." x ".$product['quantite']."</h4></div>";
-                                echo "<div class='col-6'><h4>Prix: ".($price * $product['quantite'])."$</h4></div>";
+                                echo "<div class='col-6'><h4>Produit #".$product['id_produit']."</h4> <h6>(".$Produit->nom.")</h6>"."<h4> x ".$product['quantite']."</h4></div>";
+                                echo "<div class='col-6 mt-5'><h4>Prix: ".($price * $product['quantite'])."$</h4></div>";
                                 echo "</div>";
                             }
                         }
@@ -57,8 +57,10 @@
                 </div>
                 <h4 class="text-danger mt-3">Prix total: <?php echo $_SESSION['price']; ?>$
                 </h4>
-                <h3 class="text-danger">Prix final: <?php echo number_format(($_SESSION['price'] * 1.15), 2); ?>$
-                </h3>
+                <h3 class="text-danger">Prix final: <?php echo number_format(($_SESSION['price'] * 1.05), 2); ?>$
+                    (TPS seulement)</h3>
+                <h5 class="mt-3">Adresse de livraison: <?php echo $_SESSION['adress']; ?>
+                </h5>
                 <?php
                     endif;
                 ?>

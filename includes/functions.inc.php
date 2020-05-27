@@ -54,7 +54,7 @@
     }
 
     /********************
-    Fonctions d'inscription
+    Fonctions d'inscription et de modification
     ********************/
 
     /**
@@ -73,6 +73,73 @@
             return true;
         }
         return false;
+    }
+
+    /**
+     * Vérifie si le mot de passe existe
+     * @return bool: Vrai s'il existe
+     */
+    function validatePassword()
+    {
+        $ids = getIDs();
+
+        foreach ($ids as $id) {
+            if (checkForPassword($_POST['password'], $id)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Vérifie si l'adresse email existe
+     * @return bool: Vrai s'il existe
+     */
+    function validateEmail()
+    {
+        $ids = getIDs();
+
+        foreach ($ids as $id) {
+            if (checkForEmail($_POST['email'], $id)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Retourne la liste des ID de tous les clients
+     * @return array: Les ID
+     */
+    function getIDs()
+    {
+        $Client = new Client();
+        $clients = $Client->all();
+
+        $id = array();
+        foreach ($clients as $client) {
+            array_push($id, $client['id']);
+        }
+        return $id;
+    }
+
+    /**
+     * Crée le client dans la base de données
+     */
+    function createUser()
+    {
+        $Client = new Client();
+        $Client->prenom = $_POST['firstName'];
+        $Client->nom = $_POST['lastName'];
+        $Client->adresse = $_POST['adress'];
+        $Client->ville = $_POST['city'];
+        $Client->mot_passe = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $Client->province = $_POST['province'];
+        $Client->code_postal = $_POST['postalCode'];
+        $Client->usager = $_POST['user'];
+        $Client->courriel = $_POST['email'];
+        $Client->Create();
+        redirect();
     }
 
     /********************
@@ -384,6 +451,9 @@
         }
     }
 
+    /**
+     * Vide le panier
+     */
     function emptyCart()
     {
         $_SESSION['cartArray'] = array();
@@ -405,15 +475,24 @@
         return end($ordersArray);
     }
 
+    function getAdress($clientId)
+    {
+        $Client = new Client();
+        $Client->id = $clientId;
+        $Client->Find();
+        $_SESSION['adress'] = $Client->adresse.", ".$Client->ville.", ".$Client->province." (".$Client->code_postal.")";
+    }
+
     /********************
     Fonctions autres
     ********************/
 
     /**
      * Retourne un nombre aléatoire entre ID du premier produit et du dernier
-     * @return id: ID aléatoire
+     * @return id:  ID aléatoire
+     * @const:      Les constantes sont dans config.inc.php
      */
     function getRandomId()
     {
-        return rand(3, 11);
+        return rand(FIRST_BOOK, LAST_BOOK);
     }

@@ -12,3 +12,6 @@
     define("DBPASSWORD", "qwerty123");
 
     define('DOCROOT', $_SERVER['DOCUMENT_ROOT']);
+
+    define('FIRST_BOOK', 3);
+    define('LAST_BOOK', 11);

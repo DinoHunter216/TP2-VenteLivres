@@ -12,7 +12,7 @@
         require DOCROOT."/classes/Produit.class.php";
     ?>
 
-    <h1 class=" ml-3 text-danger">Accueil</h1>
+    <h1 class=" ml-3 text-danger">GrosLivres</h1>
     <h3 class=" ml-3">Le meilleur vendeur de livre chez LocalHost</h3>
 
     <div class="container-fluid">
