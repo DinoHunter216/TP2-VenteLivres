@@ -178,9 +178,8 @@
             <div class="rendered-form"><input type="hidden" name="id"
                     value="<?php echo $product['id']; ?>">
                 <label for="quantity" required="true">Quantité à ajouter</label>
-                <input type="number" name="quantity" class="form-control" min="1"
-                    max="<?php echo $product['quantite']; ?>"
-                    value="1">
+                <input type="number" name="quantity" class="form-control" min="0"
+                    max="<?php echo($product['quantite'] - getNumberOfTimesItemIsInCart($product['id'])); ?>">
             </div>
             <input type="submit" value="Ajouter" class="btn btn-outline-danger mt-2" style="width: 100%;">
         </form>
@@ -199,7 +198,14 @@
 <?php
                 }
             }
-            showTotalPrice();
+            showTotalPrice(); ?>
+<form action="action/deleteCart.php" method="post" class="mb-2 mt-3">
+    <div class="rendered-form">
+        <input type="hidden" name="cart">
+        <input type="submit" value="Vider le panier" class="btn btn-outline-danger">
+    </div>
+</form>
+<?php
         } else {
             echo "Aucun produit dans le panier";
         }
