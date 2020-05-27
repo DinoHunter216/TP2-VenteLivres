@@ -2,7 +2,7 @@
 <html class="no-js" lang="">
 
 <?php
-    define("SITETITLE", "| Accueil");
+    define("SITETITLE", "| Panier");
     require DOCROOT."/includes/head.inc.php";
 ?>
 
