@@ -10,7 +10,7 @@ Il s'agit de mon projet de fin de deuxième session en [Informatique: Programmat
 
 ## Les langages
 
-J'utilise personnelement les langages suivants:
+J'utilise personnellement les langages suivants:
 
 - HTML
 - CSS
@@ -24,7 +24,7 @@ J'utilise le paquet Linux LAMP. Donc, mon site utilise Apache et PHP ainsi qu'un
 
 ### Accès à la base de données
 
-Les accès sont fait en utilisant PDO et des classes crées par [Vivek Wicky Aswal](https://twitter.com/#!/VivekWickyAswal) ([Son GitHub](https://github.com/wickyaswal/PHP-MySQL-PDO-Database-Class)). Pour l'utiliser, il suffit de d'aller dans le fichier includes/config.inc.php pour changer le code suivant:
+Les accès sont faits en utilisant PDO et des classes créées par [Vivek Wicky Aswal](https://twitter.com/#!/VivekWickyAswal) ([Son GitHub](https://github.com/wickyaswal/PHP-MySQL-PDO-Database-Class)). Pour l'utiliser, il suffit d'aller dans le fichier includes/config.inc.php pour changer le code suivant:
 
 | Code                                         | Utilisation                                    |
 | -------------------------------------------- | ---------------------------------------------- |
@@ -38,7 +38,7 @@ Il sera utile de noter que le « Rewrite Engine » est activé et que le site ut
 
 ### _Crédits_
 
-- Crédits à mon professeur Jimmy Gilbert pour la tâche et quelques parties de on site, dont l'index. Cette dite tâche peut être trouvée dans le dossier doc.
+- Crédits à mon professeur Jimmy Gilbert pour la tâche et quelques parties du site, dont l'index. Cette dite tâche peut être trouvée dans le dossier doc.
 
 - Crédits à Bootstrap 4 et MDBootstrap pour l'affichage de la page.
 
