@@ -163,7 +163,7 @@
                     Voir plus
                 </a>
                 <p class="mt-2 ml-3">
-                    <?php echo $product['prix']." $"; ?>
+                    <?php echo($product['prix'] * getNumberOfTimesItemIsInCart($product['id']))." $"; ?>
                 </p>
                 <p class="mt-2 ml-3">
                     <?php echo "Quantité: ".getNumberOfTimesItemIsInCart($product['id']); ?>
@@ -198,7 +198,8 @@
 <?php
                 }
             }
-            showTotalPrice(); ?>
+            $price = getTotalPrice();
+            echo "<h4 class='ml-3 mb-0 mt-2 text-danger'>Le prix total est de ".$price."$</h4>"; ?>
 <form action="action/deleteCart.php" method="post" class="mb-2 mt-3">
     <div class="rendered-form">
         <input type="hidden" name="cart">
@@ -211,7 +212,7 @@
         }
     }
 
-    function showTotalPrice()
+    function getTotalPrice()
     {
         $price = 0;
         $Produit = new Produit();
@@ -221,7 +222,7 @@
             $Produit->Find();
             $price += $Produit->prix;
         }
-        echo "<h4 class='ml-3 mb-0 mt-2 text-danger'>Le prix total est de ".$price."$</h4>";
+        return $price;
     }
 
     function deleteItemFromCart($item)
@@ -238,19 +239,24 @@
         $Commande->statut = 'en cours';
         if ($method == 'check') {
             $Commande->type_paiement = 'chèque';
+            $_SESSION['payment'] = 'Chèque';
         } elseif ($method == 'cash') {
             $Commande->type_paiement = 'comptant';
+            $_SESSION['payment'] = 'Comptant';
         } elseif ($method == 'credit') {
             $Commande->type_paiement = 'crédit';
+            $_SESSION['payment'] = 'Crédit';
         } elseif ($method == 'paypal') {
             $Commande->type_paiement = 'paypal';
+            $_SESSION['payment'] = 'Paypal';
         }
         $Client->id = checkForUser($_SESSION['utilisateur']);
         $Client->Find();
         $Commande->id_client = $Client->id;
+        $clientId = $Client->id;
         $Commande->Create();
 
-        return $Commande->id;
+        return $clientId;
     }
 
     function getRandomId()
@@ -258,12 +264,27 @@
         return rand(3, 11);
     }
 
-    function createBill()
+    function createBill($clientId)
     {
         $Produit = new Produit();
-        $Produit->all();
-        foreach ($Produit->id as $id) {
-            // TODO
+        $products = $Produit->all();
+        foreach ($products as $product) {
+            $id = $product['id'];
+            $productsArray = $_SESSION['cartArray'];
+            if (in_array($id, $productsArray)) {
+                $Panier = new Panier();
+                $Panier->id_produit = $product['id'];
+
+                $Commande = new Commande();
+                $Commande->id = getLastOrder($clientId);
+                $Commande->Find();
+                $Panier->id_commande = $Commande->id;
+                $_SESSION['orderId'] = $Commande->id;
+
+                $quantity = getNumberOfTimesItemIsInCart($product['id']);
+                $Panier->quantite = $quantity;
+                $Panier->Create();
+            }
         }
     }
 
@@ -284,4 +305,15 @@
     function emptyCart()
     {
         $_SESSION['cartArray'] = array();
+    }
+
+    function getLastOrder($clientId)
+    {
+        $ordersArray = array();
+        $Commande = new Commande();
+        $orders = $Commande->all();
+        foreach ($orders as $order) {
+            array_push($ordersArray, $order['id']);
+        }
+        return end($ordersArray);
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : sam. 23 mai 2020 à 15:41
+-- Généré le : mar. 26 mai 2020 à 22:58
 -- Version du serveur :  8.0.20-0ubuntu0.20.04.1
 -- Version de PHP : 7.4.3
 
@@ -49,8 +49,7 @@ CREATE TABLE `client` (
 
 INSERT INTO `client` (`id`, `prenom`, `nom`, `adresse`, `ville`, `province`, `code_postal`, `usager`, `mot_passe`, `courriel`) VALUES
 (4, 'sdfsdf', 'fsdfsdf', 'sdfsdfsdfsdf', 'Sainte-Foy', 'sdfsdfsd', 'H0H0H0', '67458675856786', '123456', 'masterjim11@gmail.com'),
-(5, 'Paul2', 'Houde', 'dasfsdfsad', 'Sainte-Foy', 'sadfsafd', 'H0H0H0', '45634564357465756745647', '123456', 'msdgfsdgsdfgsdfgsdfgm@gmail.com'),
-(6, 'Jérémy', 'Dumas', '216 de Senneterre', 'Québec', 'Québec', 'G1V1T3', 'Test', '$2y$10$rZEgcIzaXoLqIpeMdrZdE.z3SVI4ONW9.DmlqsfaJq7H.ekgOdLIG', 'jeremydumas2002@gmail.com');
+(5, 'Paul2', 'Houde', 'dasfsdfsad', 'Sainte-Foy', 'sadfsafd', 'H0H0H0', '45634564357465756745647', '123456', 'msdgfsdgsdfgsdfgsdfgm@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -148,7 +147,7 @@ ALTER TABLE `produit_commande`
 -- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `commande`

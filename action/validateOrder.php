@@ -9,9 +9,10 @@
 
     session_start();
     if (isset($_POST['payment'])) {
-        $orderId = createOrder($_POST['payment']);
-        createBill();
+        $clientId = createOrder($_POST['payment']);
+        createBill($clientId);
+        $_SESSION['price'] = getTotalPrice();
         removeQuantities();
         emptyCart();
     }
-    // redirect("facture");
+    redirect("facture");

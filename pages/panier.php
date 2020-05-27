@@ -47,7 +47,7 @@
                                     <option value="paypal">Paypal</option>
                                 </select>
                                 <div class="invalid-tooltip">
-                                    Veuillez choisir une méthode paiement.
+                                    Veuillez choisir une méthode de paiement.
                                 </div>
                             </div>
                         </div>

@@ -5,7 +5,7 @@
       <div class="col-md-6 mt-md-0 mt-3">
         <h5 class="text-uppercase">Crédits</h5>
         <hr style="border: none; border-bottom: 2px solid; margin: 0; margin-bottom: 8px; width: 100%;" class="text-danger" />
-        <p>Bootstrap 4 | MDBootstrap | Inspiration Archambault</p>
+        <p>Bootstrap 4 | MDBootstrap | Inspiration Archambault | <a class="text-white" href="https://uncensoredlibrary.com/en" target="_blank">The Uncensored Library</a></p>
       </div>
     </div>
   </div>
