@@ -6,22 +6,24 @@
         die();
     }
 
+    /********************
+    Fonctions de connexion
+    ********************/
+    
+    /**
+     * Création de l'utilisateur en session
+     * @param user:     Nom d'usager de l'utilisateur
+     */
     function createSession($user)
     {
         $_SESSION['utilisateur'] = $user;
     }
-
-    function createCart()
-    {
-        $_SESSION['cartExists'] = true;
-        $_SESSION['cartArray'] = array();
-    }
-
-    function addItemToCart($item)
-    {
-        array_push($_SESSION['cartArray'], $item);
-    }
-
+    
+    /**
+     * Vérification de l'utilisateur
+     * @param user:     ID de l'utilisateur
+     * @return id:      L'ID de l'utilisateur ou -1 s'il n'existe pas
+     */
     function checkForUser($user)
     {
         $Client = new Client();
@@ -35,6 +37,12 @@
         return -1;
     }
 
+    /**
+     * Vérification du mot de passe
+     * @param password: Le mot de passe entré lors de la connexion
+     * @param id:       ID du client
+     * @return bool:    Vrai si le mot de passe correspond
+     */
     function checkForPassword($password, $id)
     {
         $Client = new Client();
@@ -45,6 +53,16 @@
         return (password_verify($password, $mdp));
     }
 
+    /********************
+    Fonctions d'inscription
+    ********************/
+
+    /**
+     * Vérification du email
+     * @param email:    L'email entré lors de l'inscription
+     * @param id:       ID du client
+     * @return bool:    Vrai si l'email existe déjà
+     */
     function checkForEmail($email, $id)
     {
         $Client = new Client();
@@ -57,58 +75,32 @@
         return false;
     }
 
+    /********************
+    Fonctions de panier
+    ********************/
 
-    function productExist($search)
+    /**
+     * Création du panier en session
+     */
+    function createCart()
     {
-        $Produit = new Produit();
-        $produits = $Produit->all();
-
-        $id = array();
-
-        foreach ($produits as $produit) {
-            if (strpos(strtolower($produit['nom']), strtolower($search)) !== false) {
-                array_push($id, $produit['id']);
-            }
-        }
-        return $id;
+        $_SESSION['cartExists'] = true;
+        $_SESSION['cartArray'] = array();
     }
 
-    function showProduct($id)
+    /**
+     * Ajout d'un item dans le panier
+     * @param itemID: ID de l'item à ajouter
+     */
+    function addItemToCart($itemID)
     {
-        $Produit = new Produit();
-        echo "<div class='container-fluid'><div class='row'>";
-        for ($i = 0; $i < sizeof($id); $i++):
-        $Produit->id = $id[$i];
-        $Produit->Find(); ?>
-<div class="col-sm-12 col-md-4">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-6">
-                <h3>
-                    <?php echo $Produit->nom."</br>"; ?>
-                </h3>
-                <a href='/<?php echo $Produit->image; ?>'
-                    class="btn btn-outline-danger my-2 my-sm-0">
-                    Voir plus
-                </a>
-            </div>
-            <div class="col-6">
-                <a tabindex="0" class="btn btn-lg" role="button" data-toggle="popover" data-trigger="focus"
-                    title="Description du livre"
-                    data-content="<?php echo $Produit->description; ?>">
-                    <img src='<?php echo "/img/".$Produit->image.".jpg"; ?>'
-                        alt='Couverture' width='130' height='200' class="border border-dark rounded-sm">
-                </a>
-                </br>
-            </div>
-        </div>
-    </div>
-    </br>
-</div>
-<?php endfor;
-        echo "</div></div>";
+        array_push($_SESSION['cartArray'], $itemID);
     }
 
+    /**
+     * Retourne le nombre d'item dans le panier
+     * @return numberOfItems: Le nombre d'item dans le panier
+     */
     function getNumberOfItems()
     {
         $produits = $_SESSION['cartArray'];
@@ -118,7 +110,12 @@
         }
         return $numberOfItems;
     }
-
+    
+    /**
+     * Retourne le nombre de fois qu,un item se retrouve dans le panier
+     * @param id:               ID de l'item recherché
+     * @return numberOfTimes:   Le nombre de fois que l'item recherché est trouvé dans le panier
+     */
     function getNumberOfTimesItemIsInCart($id)
     {
         $cart = $_SESSION['cartArray'];
@@ -130,7 +127,10 @@
         }
         return $numberOfTimes;
     }
-
+    
+    /**
+     * Affiche le panier en HTML
+     */
     function showCart()
     {
         if (getNumberOfItems() > 0) {
@@ -211,7 +211,11 @@
             echo "Aucun produit dans le panier";
         }
     }
-
+    
+    /**
+     * Retourne le prix total des items dans le panier
+     * @return price: Le prix total
+     */
     function getTotalPrice()
     {
         $price = 0;
@@ -225,12 +229,88 @@
         return $price;
     }
 
+    /**
+     * Retire un item du panier
+     * @param item: L'item à retirer
+     */
     function deleteItemFromCart($item)
     {
         $index = array_search($item, $_SESSION['cartArray']);
         unset($_SESSION['cartArray'][$index]);
     }
 
+    /********************
+    Fonctions de recherche
+    ********************/
+
+    /**
+     * Vérifie si le produit recherché existe
+     * @param search:   Le produit recherché
+     * @return id:      ID du ou des produits si trouvé
+     */
+    function productExist($search)
+    {
+        $Produit = new Produit();
+        $produits = $Produit->all();
+
+        $id = array();
+
+        foreach ($produits as $produit) {
+            if (strpos(strtolower($produit['nom']), strtolower($search)) !== false) {
+                array_push($id, $produit['id']);
+            }
+        }
+        return $id;
+    }
+
+    /**
+     * Affiche le produit recherchés
+     * @param id: ID du produit recherché
+     */
+    function showProduct($id)
+    {
+        $Produit = new Produit();
+        echo "<div class='container-fluid'><div class='row'>";
+        for ($i = 0; $i < sizeof($id); $i++):
+        $Produit->id = $id[$i];
+        $Produit->Find(); ?>
+<div class="col-sm-12 col-md-4">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6">
+                <h3>
+                    <?php echo $Produit->nom."</br>"; ?>
+                </h3>
+                <a href='/<?php echo $Produit->image; ?>'
+                    class="btn btn-outline-danger my-2 my-sm-0">
+                    Voir plus
+                </a>
+            </div>
+            <div class="col-6">
+                <a tabindex="0" class="btn btn-lg" role="button" data-toggle="popover" data-trigger="focus"
+                    title="Description du livre"
+                    data-content="<?php echo $Produit->description; ?>">
+                    <img src='<?php echo "/img/".$Produit->image.".jpg"; ?>'
+                        alt='Couverture' width='130' height='200' class="border border-dark rounded-sm">
+                </a>
+                </br>
+            </div>
+        </div>
+    </div>
+    </br>
+</div>
+<?php endfor;
+        echo "</div></div>";
+    }
+
+    /********************
+    Fonctions de commande
+    ********************/
+
+    /**
+     * Crée la commande dans la base de données
+     * @return id: ID du client qui passe la commande
+     */
     function createOrder($method)
     {
         $Commande = new Commande();
@@ -259,11 +339,10 @@
         return $clientId;
     }
 
-    function getRandomId()
-    {
-        return rand(3, 11);
-    }
-
+    /**
+     * Insère dans la table produit_commande les produits pour la dernière commande
+     * @param clientID: ID du client qui a passé la commande
+     */
     function createBill($clientId)
     {
         $Produit = new Produit();
@@ -288,6 +367,9 @@
         }
     }
 
+    /**
+     * Enlève les produits commandés de la base de données
+     */
     function removeQuantities()
     {
         $produits = $_SESSION['cartArray'];
@@ -307,6 +389,11 @@
         $_SESSION['cartArray'] = array();
     }
 
+    /**
+     * Retourne la dernière commande du client
+     * @param clientId: ID du client
+     * @return order:   La dernière commande
+     */
     function getLastOrder($clientId)
     {
         $ordersArray = array();
@@ -316,4 +403,17 @@
             array_push($ordersArray, $order['id']);
         }
         return end($ordersArray);
+    }
+
+    /********************
+    Fonctions autres
+    ********************/
+
+    /**
+     * Retourne un nombre aléatoire entre ID du premier produit et du dernier
+     * @return id: ID aléatoire
+     */
+    function getRandomId()
+    {
+        return rand(3, 11);
     }

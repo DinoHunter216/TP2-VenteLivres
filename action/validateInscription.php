@@ -30,6 +30,10 @@
         }
     }
 
+    /**
+     * Vérifie si le mot de passe existe
+     * @return bool: Vrai s'il existe
+     */
     function validatePassword()
     {
         $ids = getIDs();
@@ -42,6 +46,10 @@
         return true;
     }
 
+    /**
+     * Vérifie si l'adresse email existe
+     * @return bool: Vrai s'il existe
+     */
     function validateEmail()
     {
         $ids = getIDs();
@@ -54,6 +62,10 @@
         return true;
     }
 
+    /**
+     * Retourne la liste des ID de tous les clients
+     * @return array: Les ID
+     */
     function getIDs()
     {
         $Client = new Client();
@@ -66,6 +78,9 @@
         return $id;
     }
 
+    /**
+     * Crée l'utilisateur dans la base de données
+     */
     function createUser()
     {
         $Client = new Client();
