@@ -62,7 +62,7 @@
     })
 </script>
 
-<!-- Script de validation de la confirmation du mot de passe -->
+<!-- Script de validation de la confirmation du mot de passe | Bootstrap-->
 <script>
     function verifyPasswords() {
         let password = document.getElementById("password");

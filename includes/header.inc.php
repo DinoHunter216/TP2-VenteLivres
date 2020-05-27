@@ -54,7 +54,7 @@
             <ul class="navbar-nav mr-auto">
 
                 <?php
-                    if (isset($_SESSION['utilisateur'])):
+                if (isset($_SESSION['utilisateur'])):
                 ?>
                 <li class="nav-item">
                     <a class="nav-link text-white mx-2" href="/deconnexion">Se déconnecter</a>

@@ -1,6 +1,6 @@
 <?php
     define("SITEURL", $_SERVER["HTTP_HOST"]);
-    define("SITESTATE", "dev"); //prod ou dev
+    define("SITESTATE", "prod"); //prod ou dev
 
     // Le SITETITLE est dans chaque page
     define("SITEDESC", "");
@@ -13,5 +13,6 @@
 
     define('DOCROOT', $_SERVER['DOCUMENT_ROOT']);
 
+    // Section pour l'affiche des livres
     define('FIRST_BOOK', 3);
     define('LAST_BOOK', 11);

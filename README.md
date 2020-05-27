@@ -46,4 +46,4 @@ Il sera utile de noter que le « Rewrite Engine » est activé et que le site ut
 
 - Crédits à [HTML5Boilerplate](https://html5boilerplate.com/) pour le template du site.
 
-- Tout les autres crédits sont mentionnés en temps voulu directement de le code.
+- Tous les autres crédits sont mentionnés en temps voulu directement de le code.
